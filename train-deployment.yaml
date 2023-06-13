@@ -1,0 +1,113 @@
+###
+### A complete description of a Prefect Deployment for flow 'train'
+###
+name: iris-train
+description: null
+version: bf6dbd296f6b59a229b97c1103942565
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {}
+schedule: null
+infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: train
+manifest_path: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  _block_document_id: e7f2eabe-6e0f-475f-8086-3340bfa9423f
+  _block_document_name: anonymous-024d2045-529b-4c76-8d9e-87a7f88bd42f
+  _is_anonymous: true
+  block_type_slug: process
+  _block_type_slug: process
+storage: null
+path: C:\Users\91982\Desktop\GOKU\iris-prefect
+entrypoint: src\train_model.py:train
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    data_location:
+      title: data_location
+      default:
+        raw_location: data/raw
+        raw_file: iris.csv
+        process_location: data/processed
+      allOf:
+      - $ref: '#/definitions/DataLocation'
+    svc_params:
+      title: svc_params
+      default:
+        C:
+        - 0.1
+        - 1
+        - 10
+        - 100
+        - 1000
+        gamma:
+        - 1
+        - 0.1
+        - 0.01
+        - 0.001
+        - 0.0001
+      allOf:
+      - $ref: '#/definitions/SVC_Params'
+  required: null
+  definitions:
+    DataLocation:
+      title: DataLocation
+      type: object
+      properties:
+        raw_location:
+          title: Raw Location
+          default: data/raw
+          enum:
+          - data/raw
+          - data/processed
+          type: string
+        raw_file:
+          title: Raw File
+          default: iris.csv
+          type: string
+        process_location:
+          title: Process Location
+          default: data/processed
+          enum:
+          - data/raw
+          - data/processed
+          type: string
+    SVC_Params:
+      title: SVC_Params
+      type: object
+      properties:
+        C:
+          title: C
+          default:
+          - 0.1
+          - 1
+          - 10
+          - 100
+          - 1000
+          type: array
+          items:
+            type: number
+        gamma:
+          title: Gamma
+          default:
+          - 1
+          - 0.1
+          - 0.01
+          - 0.001
+          - 0.0001
+          type: array
+          items:
+            type: number
